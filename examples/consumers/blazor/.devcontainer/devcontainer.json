@@ -1,0 +1,15 @@
+{
+    "name": "Dev Container dotnet/sdk",
+    "image": "mcr.microsoft.com/dotnet/sdk:8.0",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/mnt/workspace,type=bind,consistency=cached", 
+    "workspaceFolder": "/mnt/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csdevkit",
+                "ms-dotnettools.csharp",
+                "ms-dotnettools.vscode-dotnet-runtime"
+            ]
+        }
+    }
+}
