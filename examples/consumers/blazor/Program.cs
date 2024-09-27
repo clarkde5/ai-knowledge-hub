@@ -1,10 +1,22 @@
 using BlazorApp.Components;
+using Microsoft.SemanticKernel;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddKernel();
+
+var aiConfig = builder.Configuration.GetSection("SmartComponents");
+
+builder.Services.AddAzureOpenAIChatCompletion(
+    deploymentName: aiConfig["DeploymentName"]!,
+    endpoint: aiConfig["Endpoint"]!,
+    apiKey: aiConfig["ApiKey"]!);
+
+builder.Services.AddScoped(sp => KernelPluginFactory.CreateFromType<ThemePlugin>(serviceProvider: sp));
 
 var app = builder.Build();
 
