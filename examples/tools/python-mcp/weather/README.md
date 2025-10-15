@@ -1,6 +1,6 @@
 # 🌤️ Weather MCP Server (Python)
 
-This project is a containerized Python implementation of an [MCP server](https://modelcontext.org/) using the `weather` example from the [MCP Quickstart Resources](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python). It supports development via **VS Code Dev Containers** and runs the server using the **STDIO transport**, suitable for integration with tools like **Claude**.
+This project is a containerized Python implementation of an [MCP server](https://modelcontextprotocol.info/) using the `weather` example from the [MCP Quickstart Resources](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python). It supports development via **VS Code Dev Containers** and runs the server using the **STDIO transport**, suitable for integration with tools like **Claude**.
 
 ---
 
