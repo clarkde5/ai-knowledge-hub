@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.weather/.venv/
+.weather/venv/
+
+# uv virtual environment folder (if any)
+.venv/
+
+# Python dependency lock files (optional: ignore if you want to track)
+# uv.lock
+
+# VS Code settings and workspace files
+.vscode/
+.devcontainer/.vscode/
+
+# Docker-related files
+*.log
+docker-compose.override.yml
+
+# Docker container volumes and build files
+docker-compose.override.yml
+*.env
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Pytest cache
+.pytest_cache/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE specific
+.idea/
+*.iml

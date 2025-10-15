@@ -1,0 +1,13 @@
+{
+  "name": "MCP Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "target": "dev"
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "echo 'Container ready. Run setup script manually if needed.'",
+  "remoteUser": "root"
+}
