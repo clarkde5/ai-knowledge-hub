@@ -152,7 +152,7 @@ Claude will forward the request to the containerized MCP server and respond appr
 
 ## 📚 References
 
-- [Model Context Protocol (MCP)](https://modelcontext.org/)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.info/)
 - [Quickstart: Weather Server Example](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python)
 - [uv Python Package Manager](https://github.com/astral-sh/uv)
 - [Claude + MCP Integration Docs](https://docs.claude.com/en/docs/mcp)
