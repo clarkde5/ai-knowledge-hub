@@ -182,23 +182,21 @@ For more details, see the [GitHub Copilot MCP Server documentation](https://code
 
 When you run the server (e.g., with Docker or Python), it will block and wait for input on stdin. You can interact with the server by typing JSON-RPC messages directly into the terminal. Each message should be a single line of JSON, and you can press Enter to send it. The server will respond on stdout.
 
+
 **Example session:**
 
+```text
 Client (stdin):
-```json
 {"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0}
-```
 Server (stdout):
-```json
 {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"weather","version":"1.16.0"}}}
-```
 
 Client (stdin):
-```json
+{"method":"notifications/initialized","jsonrpc":"2.0"}
+
+Client (stdin):
 {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
-```
 Server (stdout):
-```json
 {"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_alerts","description":"Get weather alerts for a US state. ..."},{"name":"get_forecast","description":"Get weather forecast for a location. ..."}]}}
 ```
 
