@@ -57,7 +57,7 @@ This project is fully set up to use [VS Code Dev Containers](https://code.visual
    uv run mcp dev weather.py
    ```
 
-   This starts the MCP Inspector with the weather server using **STDIO** transport.
+  This starts the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) with the weather server using **STDIO** transport.
 
 ---
 
@@ -115,29 +115,95 @@ This will launch the MCP server over `STDIO` — ready to receive requests from 
 
 ---
 
+
 ## 🤖 Claude Integration
 
 To use this server from **Claude Desktop**, add the following to your `claude_desktop_config.json`:
 
 ```json
-"mcpServers": {
-  "Weather MCP Server": {
-    "command": "docker",
-    "args": [
-      "run",
-      "-i",
-      "--rm",
-      "weather-mcp-runtime"
-    ]
+{
+  "mcpServers": {
+    "Weather MCP Server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "weather-mcp-runtime"
+      ]
+    }
   }
 }
 ```
 
+
 You can then prompt Claude with:
 
-> **"Using the Weather MCP Server, what is the weather in Michigan?"**
+> **"Using the Weather MCP Server, what is the weather in Lansing, MI?"**
 
 Claude will forward the request to the containerized MCP server and respond appropriately.
+
+---
+
+## 🤖 GitHub Copilot Integration
+
+You can also use this server as a [custom MCP server in GitHub Copilot](https://code.visualstudio.com/docs/copilot/customization/mcp-servers). Add the following entry inside the `servers` object in your `.vscode/mcp.json`:
+
+```jsonc
+{
+  "servers": {
+    "weather-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "weather-mcp-runtime"
+      ]
+    }
+  }
+}
+```
+
+
+After configuring, you can prompt Copilot with:
+
+> **"Using the weather-mcp server, what is the weather in Lansing, MI?"**
+
+Copilot will forward the request to the containerized MCP server and respond with the result.
+
+For more details, see the [GitHub Copilot MCP Server documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
+
+---
+
+
+## 🖥️ Direct STDIO Interaction
+
+When you run the server (e.g., with Docker or Python), it will block and wait for input on stdin. You can interact with the server by typing JSON-RPC messages directly into the terminal. Each message should be a single line of JSON, and you can press Enter to send it. The server will respond on stdout.
+
+**Example session:**
+
+Client (stdin):
+```json
+{"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0}
+```
+Server (stdout):
+```json
+{"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"weather","version":"1.16.0"}}}
+```
+
+Client (stdin):
+```json
+{"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+```
+Server (stdout):
+```json
+{"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_alerts","description":"Get weather alerts for a US state. ..."},{"name":"get_forecast","description":"Get weather forecast for a location. ..."}]}}
+```
+
+
+You can continue typing additional JSON-RPC requests as needed. To exit, use Ctrl+C.
 
 ---
 
@@ -156,6 +222,7 @@ Claude will forward the request to the containerized MCP server and respond appr
 - [Quickstart: Weather Server Example](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python)
 - [uv Python Package Manager](https://github.com/astral-sh/uv)
 - [Claude + MCP Integration Docs](https://docs.claude.com/en/docs/mcp)
+- [MCP Inspector Documentation](https://modelcontextprotocol.io/docs/tools/inspector)
 
 ---
 
